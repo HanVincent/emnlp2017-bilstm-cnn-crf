@@ -10,7 +10,9 @@
 .pydevproject
 .project
 
-
+venv/
+.ipynb_checkpoints/
+**/*/.ipynb_checkpoints/
 
 data/ace
 data/conll2003_ner

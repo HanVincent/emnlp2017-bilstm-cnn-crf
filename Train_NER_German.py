@@ -33,8 +33,8 @@ logger.addHandler(ch)
 #
 ######################################################
 datasets = {
-    'GermEval':                                   #Name of the dataset
-        {'columns': {1:'tokens', 2:'NER_BIO'},    #CoNLL format for the input data. Column 1 contains tokens, column 2 contains NER information using BIO encoding
+    'dse':                                   #Name of the dataset
+        {'columns': {0:'tokens', 2:'NER_BIO'},    #CoNLL format for the input data. Column 1 contains tokens, column 2 contains NER information using BIO encoding
          'label': 'NER_BIO',                      #Which column we like to predict
          'evaluate': True,                        #Should we evaluate on this task? Set true always for single task setups
          'commentSymbol': None}                   #Lines in the input data starting with this string will be skipped. Can be used to skip comments
@@ -57,7 +57,13 @@ pickleFile = perpareDataset(embeddingsPath, datasets)
 embeddings, mappings, data = loadDatasetPickle(pickleFile)
 
 # Some network hyperparameters
-params = {'classifier': ['CRF'], 'LSTM-Size': [100, 100], 'dropout': (0.25, 0.25), 'charEmbeddings': 'CNN', 'maxCharLength': 50}
+params = {
+    'classifier': ['CRF'], 
+    'LSTM-Size': [100, 100, 100], 
+    'dropout': (0.25, 0.25), 
+    'charEmbeddings': None, 
+    'maxCharLength': 50
+}
 
 
 model = BiLSTM(params)
